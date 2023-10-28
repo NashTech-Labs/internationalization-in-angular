@@ -5,6 +5,12 @@
   "projects": {
     "internationalization": {
       "projectType": "application",
+      "i18n": { 
+        "locales": {
+          "en":  "src/locale/messages.en.xlf" ,
+          "fr":  "src/locale/messages.fr.xlf"
+        }
+      },
       "schematics": {
         "@schematics/angular:component": {
           "style": "scss"
@@ -18,6 +24,8 @@
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
             "outputPath": "dist/internationalization",
+            "localize": true, 
+            "i18nMissingTranslation": "error", 
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": [
@@ -50,6 +58,16 @@
               ],
               "outputHashing": "all"
             },
+            "en":{
+              "localize":[
+                "en"
+              ]
+            },
+            "fr":{
+              "localize":[
+                "fr"
+              ]
+            },
             "development": {
               "buildOptimizer": false,
               "optimization": false,
@@ -69,6 +87,12 @@
             },
             "development": {
               "browserTarget": "internationalization:build:development"
+            },
+            "en": {
+              "browserTarget": "internationalization:build:en"
+            },
+            "fr": {
+              "browserTarget": "internationalization:build:fr"
             }
           },
           "defaultConfiguration": "development"
@@ -76,7 +100,9 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "internationalization:build"
+            "browserTarget": "internationalization:build",
+            "format": "xlf",
+            "outputPath": "src/locale"
           }
         },
         "test": {
